@@ -1,4 +1,4 @@
-## Badoo gitphp repository browsing and code review tool
+# Badoo gitphp repository browsing and code review tool
 
 The project was originally forked from https://github.com/xiphux/gitphp. 
 But we changed almost everything and added lot of new features.
@@ -17,11 +17,24 @@ But we changed almost everything and added lot of new features.
 * Access control, repositories management - no gitosis is reguired, everything is done inside gitphp
 * and even more
 
-### Installation
-For manual installation explore .setup dir and find all nesessary scripts and tools. Service requires mysql, php and nginx to work. Setup scenario can be found in .setup/Dockerfile.
+## Installation - Docker
+### Create network
+    docker network create gitphp.net
 
-### Docker
-For docker build run "docker build -t gitphp .setup" from project root.
+### Run mysql container
+    docker run -d --name mysql1 --net gitphp.net -e MYSQL_ALLOW_EMPTY_PASSWORD=1 mysql
+
+### Upload scheme
+    docker run -i --rm --net gitphp.net mysql mysql -h mysql1 < .setup/schema.sql                                   
+
+### Inspect database if needed
+    docker run -ti --rm --net gitphp.net mysql mysql -h mysql1
+
+### Build application image
+    docker build -t gitphp .setup
+
+### Run application container
+    docker run -d --name gitphp1 --net gitphp.net -v (pwd):/local/gitphp -v $HOME/repositories:/local/repositories -p 8080:80 -p 2222:22 gitphp
 
 To run docker container use start.sh script in project root.
 Docker container exposes 2 ports:
