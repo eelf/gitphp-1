@@ -7,7 +7,7 @@ class GitPHP_Gitosis
 
     public static function addKey($user, $key)
     {
-        $ssh_command = self::formatKeyString('.', $user, $key) . PHP_EOL;
+        $ssh_command = self::formatKeyString('/local/gitphp', $user, $key) . PHP_EOL;
         return (false !== file_put_contents(self::HOME . self::KEYFILE, $ssh_command, FILE_APPEND));
     }
 
