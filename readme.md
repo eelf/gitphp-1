@@ -26,6 +26,7 @@ But we changed almost everything and added lot of new features.
 
 ### Upload scheme
     docker run -i --rm --net gitphp.net mysql mysql -h mysql1 < .setup/schema.sql
+    or during mysql container creation add: -v `pwd`/schema.sql:/docker-entrypoint-initdb.d/schema.sql 
 
 ### Inspect database if needed
     docker run -ti --rm --net gitphp.net mysql mysql -h mysql1

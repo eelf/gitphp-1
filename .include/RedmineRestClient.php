@@ -50,7 +50,7 @@ class RedmineRestClient
     public function addComment($issue_key, $comment)
     {
         $issue_key = (int)$issue_key;
-        $issue = new \StdClass();
+        $issue = new \stdClass();
         $issue->notes = $comment;
         return $this->_put('issues/' . $issue_key . '.json', ['issue' => $issue]);
     }

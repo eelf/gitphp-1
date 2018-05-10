@@ -1441,7 +1441,7 @@ class GitPHP_Project
             function ($branch_name) { return $this->GetHead($branch_name)->Exists(); }
         );
         $build_branches = [];
-        foreach (\GitPHP_config::GetInstance()->GetBaseBranchPatternsPerCategory($this->GetCategory()) as $pattern) {
+        foreach (\GitPHP_Config::GetInstance()->GetBaseBranchPatternsPerCategory($this->GetCategory()) as $pattern) {
             $new_heads = array_map(function (\GitPHP_Head $Head) { return $Head->GetName(); }, $this->GetHeads(3, $pattern));
             $build_branches = array_merge($new_heads, $build_branches);
         }
